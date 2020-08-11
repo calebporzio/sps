@@ -1,0 +1,75 @@
+{
+    "name": "simple-project-switcher",
+    "displayName": "Simple Project Switcher",
+    "description": "An extension to switch between projects in VS Code",
+    "version": "0.1.2",
+    "publisher": "calebporzio",
+    "engines": {
+        "vscode": "^1.44.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "configuration": {
+            "title": "TypeScript",
+            "properties": {
+                "simple-project-switcher.present": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "simple-project-switcher.directory": {
+                    "type": "string",
+                    "default": null,
+                    "description": "Your local projects directory to scan from."
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "simple-project-switcher.switch",
+                "title": "Simple Project Switcher: Switch Project"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "simple-project-switcher.switch",
+                "key": "ctrl+;",
+                "mac": "cmd+;",
+                "when": "!inQuickOpen"
+            },
+            {
+                "command": "workbench.action.quickOpenNavigateNext",
+                "key": "ctrl+;",
+                "mac": "cmd+;",
+                "when": "inQuickOpen"
+            },
+            {
+                "command": "workbench.action.quickOpenNavigatePrevious",
+                "key": "ctrl+shift+;",
+                "mac": "cmd+shift+;",
+                "when": "inQuickOpen"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.5.3",
+        "vscode": "^1.1.5",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    },
+    "dependencies": {
+        "find-up": "^4.1.0"
+    }
+}
