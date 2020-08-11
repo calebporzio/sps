@@ -7,12 +7,12 @@ export function activate(context: vscode.ExtensionContext) {
     if (! vscode.workspace.workspaceFolders) return
 
     let projectsFolder = normalizePath(config('simple-project-switcher.directory', vscode.workspace.workspaceFolders[0].uri.path.concat('/../')))
-    let currentProject = relative(projectsFolder, vscode.workspace.workspaceFolders[0].uri.path)
+    let currentProject = normalizePath(relative(projectsFolder, vscode.workspace.workspaceFolders[0].uri.path))
 
     // Store the current window globally.
     if (vscode.window.state.focused) updateMostRecentProject(context, currentProject)
 
-    vscode.window.onDidChangeWindowState(event => {
+    vscode.window.onDidChangeWindowState(function (event) {
         if (event.focused) updateMostRecentProject(context, currentProject)
     })
 
@@ -41,7 +41,7 @@ export function activate(context: vscode.ExtensionContext) {
             vscode.commands.executeCommand("vscode.openFolder", vscode.Uri.file(projects[project]), true);
 		});
 		quickPick.onDidHide(() => quickPick.dispose());
-		quickPick.show();
+        quickPick.show();
     });
 
     context.subscriptions.push(disposable);
@@ -72,8 +72,11 @@ function config(setting, fallback) {
 }
 
 function normalizePath(path) {
+    path = path.replace('/c:/', 'c:/').replace('/C:/', 'C:/')
+
     return path
         .replace(/\\/g, '/') // Convert backslashes from windows paths to forward slashes, otherwise the shell will ignore them.
+        // .replace(/ /g, '\\ ');
 }
 
 export function deactivate() {
