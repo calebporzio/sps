@@ -6,8 +6,10 @@ const { join, relative } = require('path')
 export function activate(context: vscode.ExtensionContext) {
     if (! vscode.workspace.workspaceFolders) return
 
-    let projectsFolder = normalizePath(config('simple-project-switcher.directory', vscode.workspace.workspaceFolders[0].uri.path.concat('/../')))
-    let currentProject = normalizePath(relative(projectsFolder, vscode.workspace.workspaceFolders[0].uri.path))
+
+    let projectsFolder = normalizePath(config('simple-project-switcher.directory', normalizePath(vscode.workspace.workspaceFolders[0].uri.path.concat('/../'))))
+    let currentProject = normalizePath(relative(projectsFolder, normalizePath(vscode.workspace.workspaceFolders[0].uri.path)))
+
 
     // Store the current window globally.
     if (vscode.window.state.focused) updateMostRecentProject(context, currentProject)
@@ -33,9 +35,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 		quickPick.onDidChangeSelection(selections => {
             let project = selections[0].label
-
             if (! project) return
-
             updateMostRecentProject(context, project)
 
             vscode.commands.executeCommand("vscode.openFolder", vscode.Uri.file(projects[project]), true);
@@ -61,9 +61,10 @@ function getProjectsFromDirectory(projectsFolder) {
 }
 
 function updateMostRecentProject(context, currentProject) {
+    currentProject = normalizePath(currentProject);
     context.globalState.update('simple-project-switcher.focused', currentProject)
     let recentlyAccessedProjects = context.globalState.get('simple-project-switcher.recent', [])
-    recentlyAccessedProjects.unshift(currentProject)
+    recentlyAccessedProjects.unshift(normalizePath(currentProject))
     context.globalState.update('simple-project-switcher.recent', Array.from(new Set(recentlyAccessedProjects)))
 }
 
