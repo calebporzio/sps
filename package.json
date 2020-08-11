@@ -2,7 +2,7 @@
     "name": "simple-project-switcher",
     "displayName": "Simple Project Switcher",
     "description": "An extension to switch between projects in VS Code",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "publisher": "calebporzio",
     "engines": {
         "vscode": "^1.44.0"
