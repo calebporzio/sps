@@ -1,4 +1,5 @@
 .vscode-test/**
+bin/**
 out/test/**
 out/**/*.map
 src/**
