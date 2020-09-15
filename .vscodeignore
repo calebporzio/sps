@@ -1,4 +1,5 @@
 .gitignore
+.prettierrc
 .vscode/**
 .vscode-test/**
 bin/**
