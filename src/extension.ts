@@ -57,14 +57,12 @@ export function activate(context: vscode.ExtensionContext) {
 
             const quickPick = vscode.window.createQuickPick()
 
-            quickPick.items = projectsSortedByRecentlyAccessed.map(
-                (project) => ({
-                    label: project,
-                    project: project,
-                })
-            )
+            quickPick.items = projectsSortedByRecentlyAccessed.map(project => ({
+                label: project,
+                project: project,
+            }))
 
-            quickPick.onDidChangeSelection((selections) => {
+            quickPick.onDidChangeSelection(selections => {
                 let project = selections[0].label
                 if (!project) return
                 updateMostRecentProject(context, project)
@@ -87,9 +85,9 @@ function getProjectsFromDirectory(projectsFolder) {
     let projects = {}
 
     readdirSync(projectsFolder)
-        .map((name) => join(projectsFolder, name))
-        .filter((path) => lstatSync(path).isDirectory())
-        .forEach((path) => {
+        .map(name => join(projectsFolder, name))
+        .filter(path => lstatSync(path).isDirectory())
+        .forEach(path => {
             projects[relative(projectsFolder, path)] = path
         })
 
