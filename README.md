@@ -1,1 +1,1 @@
-# Project Switcher
+# Simple Project Switcher
