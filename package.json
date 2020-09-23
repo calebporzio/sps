@@ -71,6 +71,7 @@
         "@types/mocha": "^2.2.42"
     },
     "dependencies": {
-        "find-up": "^4.1.0"
+        "find-up": "^4.1.0",
+        "untildify": "^4.0.0"
     }
 }

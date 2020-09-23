@@ -4,6 +4,7 @@ import * as vscode from 'vscode'
 
 const { lstatSync, readdirSync } = require('fs')
 const { join, relative } = require('path')
+const untildify = require('untildify');
 
 export function activate(context: vscode.ExtensionContext) {
     if (!vscode.workspace.workspaceFolders) return
@@ -120,6 +121,8 @@ function config(setting, fallback) {
 }
 
 function normalizePath(path) {
+    path = untildify(path)
+
     path = path.replace('/c:/', 'c:/').replace('/C:/', 'C:/')
 
     // Convert backslashes from windows paths to forward slashes, otherwise the shell will ignore them.
