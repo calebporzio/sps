@@ -4,6 +4,10 @@
     "description": "An extension to switch between projects in VS Code",
     "version": "0.1.4",
     "publisher": "calebporzio",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/calebporzio/simple-project-switcher.git"
+      },
     "engines": {
         "vscode": "^1.44.0"
     },
