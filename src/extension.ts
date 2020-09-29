@@ -127,7 +127,6 @@ function normalizePath(path) {
 
     // Convert backslashes from windows paths to forward slashes, otherwise the shell will ignore them.
     return path.replace(/\\/g, '/')
-    // .replace(/ /g, '\\ ');
 }
 
 export function deactivate() {
