@@ -7,7 +7,19 @@ const { join, relative } = require('path')
 const untildify = require('untildify');
 
 export function activate(context: vscode.ExtensionContext) {
-    if (!vscode.workspace.workspaceFolders) return
+    if (!vscode.workspace.workspaceFolders) {
+        let disposable = vscode.commands.registerCommand(
+            'simple-project-switcher.switch',
+            () => {
+                vscode.window.showErrorMessage(
+                    'Project Switcher requires at least one folder to be open.'
+                )
+            }
+        )
+        context.subscriptions.push(disposable)
+
+        return
+    }
 
     let projectsFolder = normalizePath(
         config(
