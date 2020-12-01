@@ -1,7 +1,10 @@
+.gitignore
+.prettierrc
+.vscode/**
 .vscode-test/**
+bin/**
 out/test/**
 out/**/*.map
+package-lock.json
 src/**
-.gitignore
 tsconfig.json
-vsc-extension-quickstart.md

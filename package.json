@@ -2,14 +2,19 @@
     "name": "simple-project-switcher",
     "displayName": "Simple Project Switcher",
     "description": "An extension to switch between projects in VS Code",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "publisher": "calebporzio",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/calebporzio/simple-project-switcher.git"
+    },
     "engines": {
         "vscode": "^1.44.0"
     },
     "categories": [
         "Other"
     ],
+    "icon": "icon.png",
     "activationEvents": [
         "*"
     ],
@@ -70,6 +75,7 @@
         "@types/mocha": "^2.2.42"
     },
     "dependencies": {
-        "find-up": "^4.1.0"
+        "find-up": "^4.1.0",
+        "untildify": "^4.0.0"
     }
 }
